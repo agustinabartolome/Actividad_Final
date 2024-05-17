@@ -30,6 +30,12 @@ public class TicketController {
         return flightClient.getAllFlights();
     }
 
+    @GetMapping("/flights/{id}")
+    public List <FlightDto> finVueloById(@PathVariable Long id)
+    {
+        return flightClient.findFlightDtoById(id);
+    }
+
     @PostMapping("/add")
     public TicketDto addTicket(@RequestBody TicketDto ticketDto){
 
@@ -40,11 +46,14 @@ public class TicketController {
 
     @PutMapping("/{idTicket}")
     public TicketDto updateTicket(@PathVariable Long idTicket, @RequestParam TicketDto ticketDto){
+
+
         return ticketService.updateTicket(idTicket, ticketDto);
     }
 
     @DeleteMapping("/delete/{idTicket}")
     public void deleteTicket(@PathVariable Long idTicket){
+
         ticketService.deleteTicket(idTicket);
     }
 

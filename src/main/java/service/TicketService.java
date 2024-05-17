@@ -1,15 +1,15 @@
 package service;
 
-import com.netflix.discovery.converters.Auto;
 import model.FlightDto;
-import model.Ticket;
 import model.TicketDto;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import repository.TicketRepository;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Service
 public class TicketService {
 
     /*
@@ -43,7 +43,8 @@ public class TicketService {
     }
     */
     public TicketDto addTicket(TicketDto ticketDto) {
-        return ticketRepository.save(ticketDto);
+        ticketRepository.save(ticketDto);
+        return ticketDto;
     }
 
     public TicketDto updateTicket(Long idTicket, TicketDto ticketDto) {
@@ -55,19 +56,21 @@ public class TicketService {
         return ticketRepository.findById(idTicket);
     }
 
-    public void deleteTicket(Long idTicket) {
+
+    public String deleteTicket(Long idTicket) {
 
         ticketRepository.delete(idTicket);
+        return "El ticket con identificación " + idTicket + " se eliminó correctamente";
     }
 
     public TicketDto generateTicket(FlightDto flightDetails) {
         TicketDto ticket = new TicketDto();
 
         ticket.setFlight(flightDetails);
-        ticket.setNombrePasajero();
-        ticket.setEmailPasajero();
-        ticket.setPasaportePasajero();
-        ticket.setCompanyDto();
+        //ticket.setNombrePasajero();
+        //ticket.setEmailPasajero();
+        //ticket.setPasaportePasajero();
+        //ticket.setCompanyDto();
 
         return ticket;
     }

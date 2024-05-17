@@ -14,7 +14,7 @@ public interface FlightClient {
     List<FlightDto> getAllFlights();
 
     @GetMapping("flights/{id}")
-    FlightDto findFlightDtoById(@PathVariable ("id") Long id);
+    List<FlightDto> findFlightDtoById(@PathVariable ("id") Long id);
 
 
     FlightDto getFlightDetails(Long flightId);
