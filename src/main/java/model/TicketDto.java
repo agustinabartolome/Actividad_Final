@@ -39,4 +39,12 @@ public class TicketDto {
     public void setCompanyDto() {
 
     }
+
+    public Long getIdTicket() {
+        return idTicket;
+    }
+
+    public void setIdTicket(Long idTicket) {
+        this.idTicket = idTicket;
+    }
 }

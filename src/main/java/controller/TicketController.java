@@ -1,5 +1,6 @@
 package controller;
 
+import exceptions.ResourceNotFoundException;
 import model.FlightDto;
 import model.Ticket;
 import model.TicketDto;
@@ -9,6 +10,7 @@ import service.FlightClient;
 import service.TicketService;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/tickets")
@@ -36,6 +38,7 @@ public class TicketController {
         return flightClient.findFlightDtoById(id);
     }
 
+    /*
     @PostMapping("/add")
     public TicketDto addTicket(@RequestBody TicketDto ticketDto){
 
@@ -43,23 +46,29 @@ public class TicketController {
 
         return ticketService.addTicket(ticketDto);
     }
+    */
 
-    @PutMapping("/{idTicket}")
-    public TicketDto updateTicket(@PathVariable Long idTicket, @RequestParam TicketDto ticketDto){
+    @PutMapping("/update")
+    public TicketDto updateTicket(@PathVariable Long idTicket, @RequestParam TicketDto ticket){
 
-
-        return ticketService.updateTicket(idTicket, ticketDto);
+        return ticketService.updateTicket(idTicket, ticket);
     }
 
     @DeleteMapping("/delete/{idTicket}")
-    public void deleteTicket(@PathVariable Long idTicket){
+    public String deleteTicket(@PathVariable Long idTicket){
 
-        ticketService.deleteTicket(idTicket);
+        try {
+            ticketService.deleteTicket(idTicket);
+            return "El ticket " + idTicket + " se eliminó correctamente";
+        } catch (ResourceNotFoundException e) {
+            System.out.println(e.getMessage());
+            return "No se encontró el ticket";
+        }
     }
 
     @GetMapping("/{idTicket}")
-    public void findTicketById(@PathVariable Long idTicket){
-        ticketService.findTicketById(idTicket);
+    public Optional <Ticket> getTicketById(@PathVariable Long idTicket){
+        return ticketService.getTicketById(idTicket);
     }
 
     @GetMapping("/generate/{id}")
@@ -97,19 +106,19 @@ public class TicketController {
         return ticketService.addTicket(ticket);
     }
 
-    @PutMapping("/{id}")
-    public Ticket updateTicket(@PathVariable Long id, @RequestParam Ticket ticket){
-        return ticketService.updateTicket(id, ticket);
+    @PutMapping("/{idTicket}")
+    public Ticket updateTicket(@PathVariable Long idTicket, @RequestParam Ticket ticket){
+        return ticketService.updateTicket(idTicket, ticket);
     }
 
-    @DeleteMapping("/delete/{id}")
-    public void deleteTicket(@PathVariable Long id){
-        ticketService.deleteTicket(id);
+    @DeleteMapping("/delete/{idTicket}")
+    public void deleteTicket(@PathVariable Long idTicket){
+        ticketService.deleteTicket(idTicket);
     }
 
-    @GetMapping("/{id}")
-    public void findTicketById(@PathVariable Long id){
-        ticketService.findTicketById(id);
+    @GetMapping("/{idTicket}")
+    public void findTicketById(@PathVariable Long idTicket){
+        ticketService.findTicketById(idTicket);
     }
 
     */
