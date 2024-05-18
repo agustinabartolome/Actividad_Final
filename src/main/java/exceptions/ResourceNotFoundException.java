@@ -1,6 +1,11 @@
 package exceptions;
 
-public class ResourceNotFoundException extends Throwable {
+import lombok.Getter;
+import lombok.Setter;
+
+@Setter
+@Getter
+public class ResourceNotFoundException extends IllegalArgumentException {
 
     private String resourceName;
 
